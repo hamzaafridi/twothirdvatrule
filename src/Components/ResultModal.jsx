@@ -10,15 +10,19 @@ import {
   VStack,
   Text,
   Box,
-  Heading
+  Heading,
+  HStack
 } from "@chakra-ui/react";
 
 import checkTwoThirdVAT from "../Utils/utils";
 import { CheckCircleIcon, NotAllowedIcon } from "@chakra-ui/icons";
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
+import { useClipboard } from '@chakra-ui/react';
+
 function ResultModal(props) {
   const { isOpen, onClose, totalProductInclVat, totalServiceInclVat } = props;
   const result = checkTwoThirdVAT(totalProductInclVat, totalServiceInclVat);
+  const { onCopy, value, setValue, hasCopied } = useClipboard(result.message);
 
   return (
     <Modal onClose={onClose} isOpen={isOpen} isCentered>
@@ -38,7 +42,12 @@ function ResultModal(props) {
               </Text>
               <br></br>
               <Card> 
-                <CardHeader><Heading size='md' textTransform='uppercase'>Message To Send</Heading></CardHeader>
+                <CardHeader>
+                    <HStack justify={"space-between"}>
+                        <Heading size='md' textTransform='uppercase'>Message To Send</Heading>
+                        <Button colorScheme="blue" onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+                    </HStack>
+                </CardHeader>
                 <CardBody whiteSpace="pre-line">{result.message}</CardBody>
                 
               </Card>
