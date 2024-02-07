@@ -31,10 +31,10 @@ function ResultModal(props) {
             <IconItem isValid={result.isTwoThirdValid} />
             <Box align="left">
               <Text>
-                Total Product Incl Vat: <b>Euro {totalProductInclVat.toFixed(2)}</b>
+                Total Product Incl Vat: <b>Euro {totalProductInclVat}</b>
               </Text>
               <Text>
-                Total Service Incl Vat: <b>Euro {totalServiceInclVat.toFixed(2)}</b>
+                Total Service Incl Vat: <b>Euro {totalServiceInclVat}</b>
               </Text>
               <br></br>
               <Card> 
